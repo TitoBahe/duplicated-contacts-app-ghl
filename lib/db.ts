@@ -1,20 +1,8 @@
-import { Pool } from "pg";
+import { createClient } from '@supabase/supabase-js'
 
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-});
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+)
 
-async function initDb() {
-  await pool.query(`
-    CREATE TABLE IF NOT EXISTS locations (
-      location_id TEXT PRIMARY KEY,
-      access_token TEXT NOT NULL,
-      refresh_token TEXT NOT NULL,
-      expires_at TIMESTAMPTZ NOT NULL
-    )
-  `);
-}
-
-initDb();
-
-export default pool;
+export default supabase
