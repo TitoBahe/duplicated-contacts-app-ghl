@@ -26,6 +26,8 @@ export async function GET(request: NextRequest) {
     expires_in: number;
     refresh_token: string;
     companyId: string;
+    locationId: string;
+    userType: string;
   } = await tokenResponse.json();
 
   if (!tokenResponse.ok) {
@@ -37,9 +39,10 @@ export async function GET(request: NextRequest) {
   const { error } = await db
     .from("locations")
     .upsert({
-      location_id: tokenData.companyId,
+      id: tokenData.locationId || tokenData.companyId,
       access_token: tokenData.access_token,
       refresh_token: tokenData.refresh_token,
+      user_type: tokenData.userType,
       expires_at,
     }, { onConflict: "location_id" });
 
