@@ -44,7 +44,7 @@ export async function GET(request: NextRequest) {
       refresh_token: tokenData.refresh_token,
       user_type: tokenData.userType,
       expires_at,
-    }, { onConflict: "location_id" });
+    }, { onConflict: "id" });
 
   if (error) {
     return NextResponse.json({ error: "Failed to save token", details: error }, { status: 500 });
