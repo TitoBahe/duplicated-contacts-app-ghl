@@ -6,7 +6,7 @@ export default function Home() {
 
   const options = {
     requestType: "code",
-    redirectUri: `https://${process.env.DOMAIN}/oauth/callback`,
+    redirectUri: `${process.env.DOMAIN}/oauth/callback`,
     clientId: process.env.GHL_CLIENT_ID!,
     scopes: [
       "contacts.readonly",

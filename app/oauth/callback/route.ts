@@ -17,7 +17,7 @@ export async function GET(request: NextRequest) {
       client_secret: process.env.GHL_CLIENT_SECRET!,
       grant_type: "authorization_code",
       code,
-      redirect_uri: `https://${process.env.DOMAIN}/oauth/callback`,
+      redirect_uri: `${process.env.DOMAIN}/oauth/callback`,
     }),
   });
 
