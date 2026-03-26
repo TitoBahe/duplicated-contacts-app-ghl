@@ -21,6 +21,10 @@ export async function GET(request: NextRequest) {
     }),
   });
 
+  const res = await tokenResponse.json();
+
+  console.log("RESPONSEEEEEEEEEEEEE: ", res)
+
   const tokenData: {
     access_token: string;
     expires_in: number;
@@ -28,7 +32,7 @@ export async function GET(request: NextRequest) {
     companyId: string;
     locationId: string;
     userType: string;
-  } = await tokenResponse.json();
+  } = res
 
   if (!tokenResponse.ok) {
     return NextResponse.json({ error: "Failed to exchange token", details: tokenData }, { status: 500 });
